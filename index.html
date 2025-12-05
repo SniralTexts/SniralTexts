@@ -1,0 +1,1641 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sniral Texts - Your Gateway to Knowledge</title>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    .smooth-transition {
+      transition: all 0.3s ease;
+    }
+    
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.5s ease-in;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .content-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .hero-gradient {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .category-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: #e0e7ff;
+      color: #4338ca;
+    }
+    
+    /* Responsive Improvements */
+    @media (max-width: 768px) {
+      body {
+        font-size: 14px;
+      }
+      
+      h1 {
+        font-size: 1.75rem !important;
+      }
+      
+      h2 {
+        font-size: 1.5rem !important;
+      }
+      
+      .hero-gradient h1 {
+        font-size: 2rem !important;
+      }
+      
+      .content-card {
+        padding: 1rem;
+      }
+      
+      input, textarea, select {
+        font-size: 16px; /* Prevents zoom on iOS */
+      }
+    }
+    
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .hero-gradient h1 {
+        font-size: 3rem !important;
+      }
+    }
+    
+    /* Touch-friendly buttons */
+    button, a {
+      min-height: 44px;
+      min-width: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    /* Better mobile spacing */
+    @media (max-width: 640px) {
+      .grid {
+        gap: 1rem !important;
+      }
+    }
+    
+    /* Reading Modes */
+    .reading-dark {
+      background: #1a1a1a !important;
+      color: #e0e0e0 !important;
+    }
+    
+    .reading-dark .content-card {
+      background: #2a2a2a !important;
+      color: #e0e0e0 !important;
+    }
+    
+    .reading-sepia {
+      background: #f4ecd8 !important;
+      color: #5c4d3c !important;
+    }
+    
+    .reading-sepia .content-card {
+      background: #f9f4e8 !important;
+      color: #5c4d3c !important;
+    }
+    
+    .reading-large {
+      font-size: 20px !important;
+    }
+    
+    .reading-large h1 { font-size: 3rem !important; }
+    .reading-large h2 { font-size: 2.5rem !important; }
+    .reading-large h3 { font-size: 2rem !important; }
+    .reading-large p { font-size: 1.5rem !important; line-height: 2rem !important; }
+    
+    .like-button {
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    
+    .like-button:hover {
+      transform: scale(1.2);
+    }
+    
+    .like-button.liked {
+      color: #ef4444;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+ </head>
+ <body class="w-full min-h-full"><!-- Header Navigation -->
+  <header id="main-header" class="w-full shadow-md sticky top-0 z-50">
+   <nav class="max-w-7xl mx-auto px-4 py-4">
+    <div class="flex items-center justify-between">
+     <div class="flex items-center space-x-2">
+      <div class="text-3xl">
+       ��
+      </div>
+      <h1 id="site-title" class="text-2xl font-bold">Sniral Texts</h1>
+     </div>
+     <div class="hidden md:flex items-center space-x-6"><button onclick="navigateTo('home')" class="smooth-transition font-medium">Home</button> <button onclick="navigateTo('books')" class="smooth-transition font-medium">Books</button> <button onclick="navigateTo('articles')" class="smooth-transition font-medium">Articles</button> <button onclick="navigateTo('podcasts')" class="smooth-transition font-medium">Podcasts</button> <button onclick="navigateTo('documentaries')" class="smooth-transition font-medium">Documentaries</button> <button onclick="navigateTo('stories')" class="smooth-transition font-medium">Stories</button> <button onclick="navigateTo('trending')" class="smooth-transition font-medium">🔥 Trending</button> <button onclick="showReadingModeMenu()" id="reading-mode-btn" class="p-2 rounded-lg smooth-transition" title="Reading Mode">👁️</button> <button onclick="showAdminLogin()" class="px-4 py-2 rounded-lg font-medium smooth-transition">Admin</button>
+     </div><button onclick="toggleMobileMenu()" class="md:hidden p-2"> <span id="mobile-menu-icon">☰</span> </button>
+    </div><!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-2"><button onclick="navigateTo('home')" class="block w-full text-left px-4 py-2 rounded-lg smooth-transition">Home</button> <button onclick="navigateTo('books')" class="block w-full text-left px-4 py-2 rounded-lg smooth-transition">Books</button> <button onclick="navigateTo('articles')" class="block w-full text-left px-4 py-2 rounded-lg smooth-transition">Articles</button> <button onclick="navigateTo('podcasts')" class="block w-full text-left px-4 py-2 rounded-lg smooth-transition">Podcasts</button> <button onclick="navigateTo('documentaries')" class="block w-full text-left px-4 py-2 rounded-lg smooth-transition">Documentaries</button> <button onclick="navigateTo('stories')" class="block w-full text-left px-4 py-2 rounded-lg smooth-transition">Stories</button> <button onclick="showAdminLogin()" class="block w-full text-left px-4 py-2 rounded-lg smooth-transition">Admin Panel</button>
+    </div>
+   </nav>
+  </header><!-- Main Content Container -->
+  <main id="main-content" class="w-full min-h-full"><!-- Content will be dynamically loaded here -->
+  </main><!-- Footer -->
+  <footer id="main-footer" class="w-full mt-16 py-8">
+   <div class="max-w-7xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+     <div>
+      <h3 class="text-lg font-bold mb-4">About Sniral Texts</h3>
+      <p id="footer-about" class="text-sm">Welcome to Sniral Texts, the website where you can learn, imagine, and create. Find many things and learn about new stuff! From real to fictional ~</p>
+     </div>
+     <div>
+      <h3 class="text-lg font-bold mb-4">Quick Links</h3>
+      <ul class="space-y-2 text-sm">
+       <li><button onclick="navigateTo('books')" class="smooth-transition">Books</button></li>
+       <li><button onclick="navigateTo('articles')" class="smooth-transition">Articles</button></li>
+       <li><button onclick="navigateTo('podcasts')" class="smooth-transition">Podcasts</button></li>
+       <li><button onclick="navigateTo('stories')" class="smooth-transition">Stories</button></li>
+      </ul>
+     </div>
+     <div>
+      <h3 class="text-lg font-bold mb-4">Sniral Ecosystem</h3>
+      <ul class="space-y-2 text-sm">
+       <li><a href="https://sniral.news" target="_blank" rel="noopener noreferrer" class="smooth-transition">Sniral News</a></li>
+       <li><a href="https://snibooks.press" target="_blank" rel="noopener noreferrer" class="smooth-transition">Snibooks Press</a></li>
+      </ul>
+     </div>
+     <div>
+      <h3 class="text-lg font-bold mb-4">Contact &amp; Legal</h3>
+      <ul class="space-y-2 text-sm">
+       <li><a href="mailto:sniraltexts@gmail.com" class="smooth-transition">📧 sniraltexts@gmail.com</a></li>
+       <li><a href="https://facebook.com/sniraltexts" target="_blank" rel="noopener noreferrer" class="smooth-transition">📘 Facebook</a></li>
+       <li><a href="https://instagram.com/sniraltexts" target="_blank" rel="noopener noreferrer" class="smooth-transition">📷 Instagram</a></li>
+       <li><a href="https://twitter.com/sniraltexts" target="_blank" rel="noopener noreferrer" class="smooth-transition">🐦 Twitter</a></li>
+       <li><button class="smooth-transition">Privacy Policy</button></li>
+       <li><button class="smooth-transition">Terms of Service</button></li>
+      </ul>
+     </div>
+    </div>
+    <div class="mt-8 pt-8 border-t text-center text-sm">
+     <p>© 2024 Sniral Texts. All rights reserved.</p>
+    </div>
+   </div>
+  </footer>
+  <script>
+    // Global state
+    let currentView = 'home';
+    let allContent = [];
+    let isAdmin = false;
+    let isDarkMode = false;
+    let mobileMenuOpen = false;
+    let readingMode = 'normal'; // normal, dark, sepia, large
+    let currentFilters = {
+      sortBy: 'newest', // newest, popular, alphabetical
+      language: 'all',
+      genre: 'all',
+      author: 'all'
+    };
+    let likedContent = JSON.parse(localStorage.getItem('likedContent') || '[]');
+    
+    const defaultConfig = {
+      background_color: "#f8fafc",
+      header_color: "#667eea",
+      card_color: "#ffffff",
+      text_color: "#1e293b",
+      accent_color: "#764ba2",
+      font_family: "system-ui",
+      font_size: 16,
+      site_title: "Sniral Texts",
+      tagline: "Your Gateway to Knowledge & Stories",
+      hero_title: "Welcome to Sniral Texts",
+      hero_subtitle: "Discover books, articles, podcasts, and more",
+      footer_about: "Welcome to Sniral Texts, the website where you can learn, imagine, and create. Find many things and learn about new stuff! From real to fictional ~",
+      admin_password: "SNIRALTEXTSWRITINGMEDIUM"
+    };
+    
+    // Data handler
+    const dataHandler = {
+      onDataChanged(data) {
+        allContent = data;
+        updateCurrentView();
+      }
+    };
+    
+    // Initialize SDKs
+    async function initializeApp() {
+      const dataResult = await window.dataSdk.init(dataHandler);
+      if (!dataResult.isOk) {
+        console.error("Failed to initialize Data SDK");
+      }
+      
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange: async (config) => {
+            document.body.style.backgroundColor = config.background_color || defaultConfig.background_color;
+            document.body.style.color = config.text_color || defaultConfig.text_color;
+            document.body.style.fontFamily = `${config.font_family || defaultConfig.font_family}, Arial, sans-serif`;
+            
+            const baseSize = config.font_size || defaultConfig.font_size;
+            document.body.style.fontSize = `${baseSize}px`;
+            
+            const header = document.getElementById('main-header');
+            header.style.backgroundColor = config.header_color || defaultConfig.header_color;
+            header.style.color = '#ffffff';
+            
+            const footer = document.getElementById('main-footer');
+            footer.style.backgroundColor = config.header_color || defaultConfig.header_color;
+            footer.style.color = '#ffffff';
+            
+            document.getElementById('site-title').textContent = config.site_title || defaultConfig.site_title;
+            document.getElementById('footer-about').textContent = config.footer_about || defaultConfig.footer_about;
+            
+            document.querySelectorAll('.content-card').forEach(card => {
+              card.style.backgroundColor = config.card_color || defaultConfig.card_color;
+            });
+            
+            document.querySelectorAll('button').forEach(button => {
+              if (!button.classList.contains('admin-btn') && !button.classList.contains('delete-btn')) {
+                button.style.color = config.text_color || defaultConfig.text_color;
+              }
+            });
+            
+            updateCurrentView();
+          },
+          mapToCapabilities: (config) => ({
+            recolorables: [
+              { 
+                get: () => config.background_color || defaultConfig.background_color, 
+                set: (c) => { 
+                  if (window.elementSdk) {
+                    window.elementSdk.setConfig({ background_color: c });
+                  }
+                } 
+              },
+              { 
+                get: () => config.header_color || defaultConfig.header_color, 
+                set: (c) => { 
+                  if (window.elementSdk) {
+                    window.elementSdk.setConfig({ header_color: c });
+                  }
+                } 
+              },
+              { 
+                get: () => config.card_color || defaultConfig.card_color, 
+                set: (c) => { 
+                  if (window.elementSdk) {
+                    window.elementSdk.setConfig({ card_color: c });
+                  }
+                } 
+              },
+              { 
+                get: () => config.text_color || defaultConfig.text_color, 
+                set: (c) => { 
+                  if (window.elementSdk) {
+                    window.elementSdk.setConfig({ text_color: c });
+                  }
+                } 
+              },
+              { 
+                get: () => config.accent_color || defaultConfig.accent_color, 
+                set: (c) => { 
+                  if (window.elementSdk) {
+                    window.elementSdk.setConfig({ accent_color: c });
+                  }
+                } 
+              }
+            ],
+            borderables: [],
+            fontEditable: {
+              get: () => config.font_family || defaultConfig.font_family,
+              set: (f) => {
+                if (window.elementSdk) {
+                  window.elementSdk.setConfig({ font_family: f });
+                }
+              }
+            },
+            fontSizeable: {
+              get: () => config.font_size || defaultConfig.font_size,
+              set: (s) => {
+                if (window.elementSdk) {
+                  window.elementSdk.setConfig({ font_size: s });
+                }
+              }
+            }
+          }),
+          mapToEditPanelValues: (config) => new Map([
+            ["site_title", config.site_title || defaultConfig.site_title],
+            ["tagline", config.tagline || defaultConfig.tagline],
+            ["hero_title", config.hero_title || defaultConfig.hero_title],
+            ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
+            ["footer_about", config.footer_about || defaultConfig.footer_about],
+            ["admin_password", config.admin_password || defaultConfig.admin_password]
+          ])
+        });
+      }
+      
+      renderHomePage();
+    }
+    
+    // Navigation
+    function navigateTo(view) {
+      currentView = view;
+      mobileMenuOpen = false;
+      document.getElementById('mobile-menu').classList.add('hidden');
+      document.getElementById('mobile-menu-icon').textContent = '☰';
+      updateCurrentView();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    function updateCurrentView() {
+      switch(currentView) {
+        case 'home':
+          renderHomePage();
+          break;
+        case 'books':
+          renderContentList('books', '📖');
+          break;
+        case 'articles':
+          renderContentList('articles', '📰');
+          break;
+        case 'podcasts':
+          renderContentList('podcasts', '🎙️');
+          break;
+        case 'documentaries':
+          renderContentList('documentaries', '🎬');
+          break;
+        case 'stories':
+          renderContentList('stories', '📚');
+          break;
+        case 'trending':
+          renderTrendingPage();
+          break;
+        case 'explore':
+          renderExplorePage();
+          break;
+        case 'admin':
+          renderAdminDashboard();
+          break;
+        default:
+          renderHomePage();
+      }
+    }
+    
+    // Home Page
+    function renderHomePage() {
+      const config = window.elementSdk?.config || defaultConfig;
+      const featuredContent = allContent.filter(c => c.featured);
+      const latestContent = allContent.slice(-6).reverse();
+      
+      const mainContent = document.getElementById('main-content');
+      mainContent.innerHTML = `
+        <div class="w-full">
+          <!-- Hero Section -->
+          <section class="hero-gradient text-white py-20 px-4">
+            <div class="max-w-4xl mx-auto text-center">
+              <h1 class="text-5xl font-bold mb-4 fade-in">${config.hero_title || defaultConfig.hero_title}</h1>
+              <p class="text-xl mb-8 fade-in">${config.hero_subtitle || defaultConfig.hero_subtitle}</p>
+              <div class="max-w-2xl mx-auto">
+                <input 
+                  type="text" 
+                  id="search-input"
+                  placeholder="Search books, articles, podcasts..." 
+                  class="w-full px-6 py-4 rounded-full text-gray-800 text-lg"
+                  onkeyup="handleSearch(event)"
+                >
+              </div>
+            </div>
+          </section>
+          
+          <!-- Quick Categories -->
+          <section class="max-w-7xl mx-auto px-4 -mt-10">
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
+              <button onclick="navigateTo('books')" class="content-card card-hover smooth-transition p-6 text-center">
+                <div class="text-4xl mb-2">📖</div>
+                <div class="font-semibold">Books</div>
+              </button>
+              <button onclick="navigateTo('articles')" class="content-card card-hover smooth-transition p-6 text-center">
+                <div class="text-4xl mb-2">📰</div>
+                <div class="font-semibold">Articles</div>
+              </button>
+              <button onclick="navigateTo('podcasts')" class="content-card card-hover smooth-transition p-6 text-center">
+                <div class="text-4xl mb-2">🎙️</div>
+                <div class="font-semibold">Podcasts</div>
+              </button>
+              <button onclick="navigateTo('documentaries')" class="content-card card-hover smooth-transition p-6 text-center">
+                <div class="text-4xl mb-2">🎬</div>
+                <div class="font-semibold">Docs</div>
+              </button>
+              <button onclick="navigateTo('stories')" class="content-card card-hover smooth-transition p-6 text-center">
+                <div class="text-4xl mb-2">📚</div>
+                <div class="font-semibold">Stories</div>
+              </button>
+              <button onclick="navigateTo('infographics')" class="content-card card-hover smooth-transition p-6 text-center">
+                <div class="text-4xl mb-2">📊</div>
+                <div class="font-semibold">Infographics</div>
+              </button>
+            </div>
+          </section>
+          
+          <!-- Latest Releases -->
+          <section class="max-w-7xl mx-auto px-4 mt-16">
+            <h2 class="text-3xl font-bold mb-8">Latest Releases</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              ${latestContent.length === 0 ? `
+                <div class="col-span-3 text-center py-12">
+                  <div class="text-6xl mb-4">📚</div>
+                  <p class="text-xl">No content yet. ${isAdmin ? 'Start creating!' : 'Check back soon!'}</p>
+                </div>
+              ` : latestContent.map(content => renderContentCard(content)).join('')}
+            </div>
+          </section>
+          
+          ${featuredContent.length > 0 ? `
+          <section class="max-w-7xl mx-auto px-4 mt-16">
+            <h2 class="text-3xl font-bold mb-8">Featured Content</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              ${featuredContent.map(content => renderContentCard(content)).join('')}
+            </div>
+          </section>
+          ` : ''}
+        </div>
+      `;
+    }
+    
+    // Content List View
+    function renderContentList(type, icon) {
+      const config = window.elementSdk?.config || defaultConfig;
+      const filteredContent = allContent.filter(c => c.type === type);
+      const typeName = type.charAt(0).toUpperCase() + type.slice(1);
+      
+      const mainContent = document.getElementById('main-content');
+      mainContent.innerHTML = `
+        <div class="w-full">
+          <section class="hero-gradient text-white py-12 px-4">
+            <div class="max-w-7xl mx-auto">
+              <h1 class="text-4xl font-bold mb-4">${icon} ${typeName}</h1>
+              <p class="text-lg">Browse our collection of ${type}</p>
+            </div>
+          </section>
+          
+          <section class="max-w-7xl mx-auto px-4 mt-8">
+            <div class="flex justify-between items-center mb-6">
+              <div class="text-lg font-semibold">${filteredContent.length} ${typeName}</div>
+              ${isAdmin ? `<button onclick="showCreateForm('${type}')" class="admin-btn px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 smooth-transition">Create New</button>` : ''}
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              ${filteredContent.length === 0 ? `
+                <div class="col-span-3 text-center py-12">
+                  <div class="text-6xl mb-4">${icon}</div>
+                  <p class="text-xl">No ${type} available yet.</p>
+                  ${isAdmin ? `<button onclick="showCreateForm('${type}')" class="mt-4 admin-btn px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 smooth-transition">Create First ${typeName.slice(0, -1)}</button>` : ''}
+                </div>
+              ` : filteredContent.map(content => renderContentCard(content)).join('')}
+            </div>
+          </section>
+        </div>
+      `;
+    }
+    
+    // Content Card
+    function renderContentCard(content) {
+      const typeIcons = {
+        books: '📖',
+        articles: '📰',
+        podcasts: '🎙️',
+        documentaries: '🎬',
+        stories: '📚',
+        infographics: '��'
+      };
+      
+      return `
+        <div class="content-card card-hover smooth-transition">
+          <div class="p-6">
+            <div class="flex items-start justify-between mb-3">
+              <span class="text-3xl">${typeIcons[content.type]}</span>
+              ${content.featured ? '<span class="category-badge">⭐ Featured</span>' : ''}
+            </div>
+            <h3 class="text-xl font-bold mb-2">${content.title}</h3>
+            <p class="text-sm mb-2">by ${content.author}</p>
+            <p class="text-sm mb-4 line-clamp-3">${content.description}</p>
+            <div class="flex items-center justify-between">
+              <span class="category-badge">${content.category}</span>
+              <div class="flex items-center gap-3">
+                <span class="text-sm">👁️ ${content.views || 0}</span>
+                <button onclick="toggleLike('${content.id}'); event.stopPropagation();" class="like-button ${likedContent.includes(content.id) ? 'liked' : ''}" title="Like">
+                  ${likedContent.includes(content.id) ? '❤️' : '🤍'} ${content.likes || 0}
+                </button>
+              </div>
+            </div>
+            ${content.series ? `<div class="mt-2 text-xs text-gray-600">📚 ${content.series} ${content.seriesOrder ? `#${content.seriesOrder}` : ''}</div>` : ''}
+            <div class="mt-4 flex gap-2">
+              <button onclick="viewContent('${content.id}')" class="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 smooth-transition">View</button>
+              ${isAdmin ? `<button onclick="editContent('${content.id}')" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 smooth-transition">Edit</button>
+              <button onclick="deleteContent('${content.id}')" class="delete-btn px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 smooth-transition">Delete</button>` : ''}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    
+    // Helper function to create video embeds
+    function getVideoEmbed(url) {
+      // YouTube
+      if (url.includes('youtube.com') || url.includes('youtu.be')) {
+        let videoId = '';
+        if (url.includes('youtu.be/')) {
+          videoId = url.split('youtu.be/')[1].split('?')[0];
+        } else if (url.includes('youtube.com/watch')) {
+          videoId = url.split('v=')[1]?.split('&')[0];
+        }
+        if (videoId) {
+          return `<iframe width="100%" height="500" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="rounded-lg"></iframe>`;
+        }
+      }
+      
+      // Vimeo
+      if (url.includes('vimeo.com')) {
+        const videoId = url.split('vimeo.com/')[1]?.split('?')[0];
+        if (videoId) {
+          return `<iframe width="100%" height="500" src="https://player.vimeo.com/video/${videoId}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen class="rounded-lg"></iframe>`;
+        }
+      }
+      
+      // Direct video URL
+      return `<video width="100%" height="500" controls class="rounded-lg">
+        <source src="${url}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>`;
+    }
+    
+    // View Content Detail
+    function viewContent(id) {
+      const content = allContent.find(c => c.id === id);
+      if (!content) return;
+      
+      // Increment views
+      const updatedContent = { ...content, views: (content.views || 0) + 1 };
+      window.dataSdk.update(updatedContent);
+      
+      const typeIcons = {
+        books: '📖',
+        articles: '📰',
+        podcasts: '🎙️',
+        documentaries: '🎬',
+        stories: '���',
+        infographics: '📊'
+      };
+      
+      const mainContent = document.getElementById('main-content');
+      mainContent.innerHTML = `
+        <div class="w-full">
+          <section class="hero-gradient text-white py-12 px-4">
+            <div class="max-w-4xl mx-auto">
+              <button onclick="navigateTo('${content.type}')" class="mb-4 text-sm hover:underline">← Back to ${content.type}</button>
+              <div class="flex items-center gap-3 mb-4">
+                <span class="text-5xl">${typeIcons[content.type]}</span>
+                <div>
+                  <h1 class="text-4xl font-bold">${content.title}</h1>
+                  <p class="text-lg mt-2">by ${content.author}</p>
+                </div>
+              </div>
+              <div class="flex gap-4 items-center">
+                <span class="category-badge bg-white text-purple-700">${content.category}</span>
+                <span class="text-sm">👁️ ${content.views || 0} views</span>
+                ${content.readingTime ? `<span class="text-sm">⏱️ ${content.readingTime} min read</span>` : ''}
+              </div>
+            </div>
+          </section>
+          
+          <section class="max-w-4xl mx-auto px-4 mt-8">
+            <div class="content-card p-8">
+              ${content.videoUrl && (content.type === 'podcasts' || content.type === 'documentaries') ? `
+                <h2 class="text-2xl font-bold mb-4">Watch ${content.type === 'podcasts' ? 'Podcast' : 'Documentary'}</h2>
+                <div class="mb-6">
+                  ${getVideoEmbed(content.videoUrl)}
+                </div>
+                
+                ${content.bloopersUrl ? `
+                  <h2 class="text-2xl font-bold mb-4 mt-8">😂 Bloopers & Behind the Scenes</h2>
+                  <div class="mb-6">
+                    ${getVideoEmbed(content.bloopersUrl)}
+                  </div>
+                ` : ''}
+              ` : ''}
+              
+              ${content.imageUrl && content.type === 'infographics' ? `
+                <h2 class="text-2xl font-bold mb-4">Infographic</h2>
+                <div class="mb-6">
+                  <img src="${content.imageUrl}" alt="${content.title}" class="w-full rounded-lg" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                </div>
+              ` : ''}
+              
+              <h2 class="text-2xl font-bold mb-4">Description</h2>
+              <p class="mb-6">${content.description}</p>
+              
+              ${content.content ? `
+                <h2 class="text-2xl font-bold mb-4 mt-8">Content</h2>
+                <div class="prose max-w-none">${content.content}</div>
+              ` : ''}
+              
+              ${content.tags ? `
+                <div class="mt-8">
+                  <h3 class="text-lg font-bold mb-3">Tags</h3>
+                  <div class="flex flex-wrap gap-2">
+                    ${content.tags.split(',').map(tag => `<span class="category-badge">${tag.trim()}</span>`).join('')}
+                  </div>
+                </div>
+              ` : ''}
+            </div>
+          </section>
+        </div>
+      `;
+    }
+    
+    // Admin Functions
+    function showAdminLogin() {
+      const config = window.elementSdk?.config || defaultConfig;
+      
+      // Create custom modal for password input
+      const modalDiv = document.createElement('div');
+      modalDiv.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+      modalDiv.innerHTML = `
+        <div class="bg-white rounded-lg p-8 max-w-md mx-4 w-full">
+          <h3 class="text-xl font-bold mb-4 text-gray-800">Admin Login</h3>
+          <input type="password" id="admin-password-input" placeholder="Enter admin password" class="w-full px-4 py-3 border border-gray-300 rounded-lg mb-4 text-gray-800">
+          <div class="flex gap-4">
+            <button onclick="this.closest('.fixed').remove()" class="flex-1 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 smooth-transition">Cancel</button>
+            <button onclick="checkAdminPassword()" class="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 smooth-transition">Login</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modalDiv);
+      
+      // Focus on input
+      setTimeout(() => {
+        document.getElementById('admin-password-input').focus();
+      }, 100);
+      
+      // Allow Enter key to submit
+      document.getElementById('admin-password-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          checkAdminPassword();
+        }
+      });
+    }
+    
+    function checkAdminPassword() {
+      const config = window.elementSdk?.config || defaultConfig;
+      const inputPassword = document.getElementById('admin-password-input').value;
+      const correctPassword = config.admin_password || defaultConfig.admin_password;
+      
+      if (inputPassword === correctPassword) {
+        document.querySelector('.fixed').remove();
+        isAdmin = true;
+        currentView = 'admin';
+        updateCurrentView();
+        showMessage('Login successful!', 'success');
+      } else {
+        showMessage('Incorrect password', 'error');
+        document.getElementById('admin-password-input').value = '';
+        document.getElementById('admin-password-input').focus();
+      }
+    }
+    
+    function renderAdminDashboard() {
+      const stats = {
+        total: allContent.length,
+        books: allContent.filter(c => c.type === 'books').length,
+        articles: allContent.filter(c => c.type === 'articles').length,
+        podcasts: allContent.filter(c => c.type === 'podcasts').length,
+        documentaries: allContent.filter(c => c.type === 'documentaries').length,
+        stories: allContent.filter(c => c.type === 'stories').length,
+        totalViews: allContent.reduce((sum, c) => sum + (c.views || 0), 0)
+      };
+      
+      const mainContent = document.getElementById('main-content');
+      mainContent.innerHTML = `
+        <div class="w-full">
+          <section class="hero-gradient text-white py-12 px-4">
+            <div class="max-w-7xl mx-auto">
+              <div class="flex justify-between items-center">
+                <div>
+                  <h1 class="text-4xl font-bold mb-2">Admin Dashboard</h1>
+                  <p class="text-lg">Manage your Sniral Texts content</p>
+                </div>
+                <button onclick="logoutAdmin()" class="px-6 py-2 bg-white text-purple-700 rounded-lg hover:bg-gray-100 smooth-transition font-semibold">Logout</button>
+              </div>
+            </div>
+          </section>
+          
+          <!-- Stats -->
+          <section class="max-w-7xl mx-auto px-4 mt-8">
+            <h2 class="text-2xl font-bold mb-6">Statistics</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+              <div class="content-card p-6 text-center">
+                <div class="text-3xl font-bold mb-2">${stats.total}</div>
+                <div class="text-sm">Total Content</div>
+              </div>
+              <div class="content-card p-6 text-center">
+                <div class="text-3xl font-bold mb-2">${stats.totalViews}</div>
+                <div class="text-sm">Total Views</div>
+              </div>
+              <div class="content-card p-6 text-center">
+                <div class="text-3xl font-bold mb-2">${stats.books}</div>
+                <div class="text-sm">📖 Books</div>
+              </div>
+              <div class="content-card p-6 text-center">
+                <div class="text-3xl font-bold mb-2">${stats.articles}</div>
+                <div class="text-sm">📰 Articles</div>
+              </div>
+            </div>
+            
+            <!-- Quick Create Buttons -->
+            <h2 class="text-2xl font-bold mb-6">Create New Content</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+              <button onclick="showCreateForm('books')" class="admin-btn content-card p-6 text-center card-hover smooth-transition">
+                <div class="text-4xl mb-2">📖</div>
+                <div class="font-semibold">Create Book</div>
+              </button>
+              <button onclick="showCreateForm('articles')" class="admin-btn content-card p-6 text-center card-hover smooth-transition">
+                <div class="text-4xl mb-2">📰</div>
+                <div class="font-semibold">Create Article</div>
+              </button>
+              <button onclick="showCreateForm('podcasts')" class="admin-btn content-card p-6 text-center card-hover smooth-transition">
+                <div class="text-4xl mb-2">🎙️</div>
+                <div class="font-semibold">Create Podcast</div>
+              </button>
+              <button onclick="showCreateForm('documentaries')" class="admin-btn content-card p-6 text-center card-hover smooth-transition">
+                <div class="text-4xl mb-2">🎬</div>
+                <div class="font-semibold">Create Documentary</div>
+              </button>
+              <button onclick="showCreateForm('stories')" class="admin-btn content-card p-6 text-center card-hover smooth-transition">
+                <div class="text-4xl mb-2">📚</div>
+                <div class="font-semibold">Create Story</div>
+              </button>
+              <button onclick="showCreateForm('infographics')" class="admin-btn content-card p-6 text-center card-hover smooth-transition">
+                <div class="text-4xl mb-2">📊</div>
+                <div class="font-semibold">Create Infographic</div>
+              </button>
+            </div>
+            
+            <!-- Recent Content -->
+            <h2 class="text-2xl font-bold mb-6">Recent Content</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              ${allContent.length === 0 ? `
+                <div class="col-span-3 text-center py-12 content-card">
+                  <div class="text-6xl mb-4">📚</div>
+                  <p class="text-xl mb-4">No content yet</p>
+                  <button onclick="showCreateForm('articles')" class="admin-btn px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 smooth-transition">Create Your First Content</button>
+                </div>
+              ` : allContent.slice(-6).reverse().map(content => renderContentCard(content)).join('')}
+            </div>
+          </section>
+        </div>
+      `;
+    }
+    
+    function showCreateForm(type) {
+      const mainContent = document.getElementById('main-content');
+      mainContent.innerHTML = `
+        <div class="w-full">
+          <section class="hero-gradient text-white py-12 px-4">
+            <div class="max-w-4xl mx-auto">
+              <button onclick="renderAdminDashboard()" class="mb-4 text-sm hover:underline">← Back to Dashboard</button>
+              <h1 class="text-4xl font-bold">Create New ${type.charAt(0).toUpperCase() + type.slice(1, -1)}</h1>
+            </div>
+          </section>
+          
+          <section class="max-w-4xl mx-auto px-4 mt-8">
+            <form id="create-form" class="content-card p-8" onsubmit="handleCreateSubmit(event, '${type}')">
+              <div class="space-y-6">
+                <div>
+                  <label for="title" class="block text-sm font-semibold mb-2">Title *</label>
+                  <input type="text" id="title" required class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                </div>
+                
+                <div>
+                  <label for="author" class="block text-sm font-semibold mb-2">Author *</label>
+                  <input type="text" id="author" required class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                </div>
+                
+                <div>
+                  <label for="description" class="block text-sm font-semibold mb-2">Description *</label>
+                  <textarea id="description" required rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg"></textarea>
+                </div>
+                
+                ${type !== 'podcasts' && type !== 'documentaries' && type !== 'infographics' ? `
+                <div>
+                  <label for="content" class="block text-sm font-semibold mb-2">Content</label>
+                  <textarea id="content" rows="10" placeholder="Full content, HTML supported..." class="w-full px-4 py-3 border border-gray-300 rounded-lg"></textarea>
+                </div>
+                ` : ''}
+                
+                <div>
+                  <label for="category" class="block text-sm font-semibold mb-2">Category *</label>
+                  <input type="text" id="category" required placeholder="e.g., Technology, Fiction, Science" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                </div>
+                
+                <div>
+                  <label for="tags" class="block text-sm font-semibold mb-2">Tags</label>
+                  <input type="text" id="tags" placeholder="Comma separated tags" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                </div>
+                
+                <div>
+                  <label for="genre" class="block text-sm font-semibold mb-2">Genre</label>
+                  <input type="text" id="genre" placeholder="e.g., Fantasy, Mystery, Educational" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                </div>
+                
+                <div>
+                  <label for="language" class="block text-sm font-semibold mb-2">Language</label>
+                  <select id="language" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                    <option value="English">English</option>
+                    <option value="Filipino">Filipino</option>
+                    <option value="Spanish">Spanish</option>
+                    <option value="French">French</option>
+                    <option value="Japanese">Japanese</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label for="series" class="block text-sm font-semibold mb-2">Series Name (Optional)</label>
+                  <input type="text" id="series" placeholder="e.g., Harry Potter, The Chronicles of..." class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                </div>
+                
+                <div>
+                  <label for="seriesOrder" class="block text-sm font-semibold mb-2">Series Order (Optional)</label>
+                  <input type="number" id="seriesOrder" min="1" placeholder="1, 2, 3..." class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                </div>
+                
+                ${type === 'articles' ? `
+                  <div>
+                    <label for="readingTime" class="block text-sm font-semibold mb-2">Reading Time (minutes)</label>
+                    <input type="number" id="readingTime" min="1" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                  </div>
+                ` : ''}
+                
+                ${type === 'podcasts' || type === 'documentaries' ? `
+                  <div>
+                    <label for="videoUrl" class="block text-sm font-semibold mb-2">📹 Upload Video (Video URL) *</label>
+                    <input type="url" id="videoUrl" required placeholder="https://youtube.com/... or https://vimeo.com/..." class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                    <p class="text-xs text-gray-600 mt-1">Paste your YouTube, Vimeo, or direct video file link here</p>
+                  </div>
+                  
+                  <div>
+                    <label for="bloopersUrl" class="block text-sm font-semibold mb-2">😂 Bloopers Video URL (Optional)</label>
+                    <input type="url" id="bloopersUrl" placeholder="https://youtube.com/... or https://vimeo.com/..." class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                    <p class="text-xs text-gray-600 mt-1">Add behind-the-scenes bloopers and funny moments</p>
+                  </div>
+                ` : ''}
+                
+                ${type === 'infographics' ? `
+                  <div>
+                    <label for="imageUrl" class="block text-sm font-semibold mb-2">🖼️ Upload Image (Image URL) *</label>
+                    <input type="url" id="imageUrl" required placeholder="https://..." class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                    <p class="text-xs text-gray-600 mt-1">Paste the URL of your infographic image file here</p>
+                  </div>
+                ` : ''}
+                
+                <div>
+                  <label for="coverImage" class="block text-sm font-semibold mb-2">Cover Image URL</label>
+                  <input type="url" id="coverImage" placeholder="https://..." class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                </div>
+                
+                <div class="flex items-center gap-2">
+                  <input type="checkbox" id="featured" class="w-5 h-5">
+                  <label for="featured" class="text-sm font-semibold">Featured Content</label>
+                </div>
+                
+                <div class="flex items-center gap-2">
+                  <input type="checkbox" id="published" checked class="w-5 h-5">
+                  <label for="published" class="text-sm font-semibold">Publish Now</label>
+                </div>
+                
+                <div class="flex gap-4">
+                  <button type="submit" id="submit-btn" class="flex-1 admin-btn px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 smooth-transition font-semibold">
+                    Create ${type.charAt(0).toUpperCase() + type.slice(1, -1)}
+                  </button>
+                  <button type="button" onclick="renderAdminDashboard()" class="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 smooth-transition font-semibold">Cancel</button>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+      `;
+    }
+    
+    async function handleCreateSubmit(event, type) {
+      event.preventDefault();
+      
+      if (allContent.length >= 999) {
+        showMessage('Maximum limit of 999 items reached. Please delete some content first.', 'error');
+        return;
+      }
+      
+      const submitBtn = document.getElementById('submit-btn');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Creating...';
+      
+      const formData = {
+        id: Date.now().toString(),
+        type: type,
+        title: document.getElementById('title').value,
+        author: document.getElementById('author').value,
+        description: document.getElementById('description').value,
+        content: document.getElementById('content').value,
+        category: document.getElementById('category').value,
+        tags: document.getElementById('tags').value,
+        genre: document.getElementById('genre').value,
+        language: document.getElementById('language').value,
+        series: document.getElementById('series').value,
+        seriesOrder: document.getElementById('seriesOrder').value ? parseInt(document.getElementById('seriesOrder').value) : 0,
+        coverImage: document.getElementById('coverImage').value,
+        featured: document.getElementById('featured').checked,
+        status: document.getElementById('published').checked ? 'published' : 'draft',
+        createdAt: new Date().toISOString(),
+        views: 0,
+        likes: 0
+      };
+      
+      // Add video URL for podcasts and documentaries
+      if (type === 'podcasts' || type === 'documentaries') {
+        formData.videoUrl = document.getElementById('videoUrl').value;
+        const bloopersUrl = document.getElementById('bloopersUrl').value;
+        if (bloopersUrl) {
+          formData.bloopersUrl = bloopersUrl;
+        }
+      }
+      
+      // Add image URL for infographics
+      if (type === 'infographics') {
+        formData.imageUrl = document.getElementById('imageUrl').value;
+      }
+      
+      if (type === 'articles') {
+        const readingTime = document.getElementById('readingTime').value;
+        if (readingTime) {
+          formData.readingTime = parseInt(readingTime);
+        }
+      }
+      
+      const result = await window.dataSdk.create(formData);
+      
+      if (result.isOk) {
+        showMessage('Content created successfully!', 'success');
+        renderAdminDashboard();
+      } else {
+        showMessage('Failed to create content. Please try again.', 'error');
+        submitBtn.disabled = false;
+        submitBtn.textContent = `Create ${type.charAt(0).toUpperCase() + type.slice(1, -1)}`;
+      }
+    }
+    
+    function editContent(id) {
+      const content = allContent.find(c => c.id === id);
+      if (!content) return;
+      
+      const mainContent = document.getElementById('main-content');
+      mainContent.innerHTML = `
+        <div class="w-full">
+          <section class="hero-gradient text-white py-12 px-4">
+            <div class="max-w-4xl mx-auto">
+              <button onclick="navigateTo('${content.type}')" class="mb-4 text-sm hover:underline">← Back to ${content.type}</button>
+              <h1 class="text-4xl font-bold">Edit ${content.type.charAt(0).toUpperCase() + content.type.slice(1, -1)}</h1>
+            </div>
+          </section>
+          
+          <section class="max-w-4xl mx-auto px-4 mt-8">
+            <form id="edit-form" class="content-card p-8" onsubmit="handleEditSubmit(event, '${id}')">
+              <div class="space-y-6">
+                <div>
+                  <label for="edit-title" class="block text-sm font-semibold mb-2">Title *</label>
+                  <input type="text" id="edit-title" value="${content.title}" required class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                </div>
+                
+                <div>
+                  <label for="edit-author" class="block text-sm font-semibold mb-2">Author *</label>
+                  <input type="text" id="edit-author" value="${content.author}" required class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                </div>
+                
+                <div>
+                  <label for="edit-description" class="block text-sm font-semibold mb-2">Description *</label>
+                  <textarea id="edit-description" required rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg">${content.description}</textarea>
+                </div>
+                
+                <div>
+                  <label for="edit-content" class="block text-sm font-semibold mb-2">Content</label>
+                  <textarea id="edit-content" rows="10" class="w-full px-4 py-3 border border-gray-300 rounded-lg">${content.content || ''}</textarea>
+                </div>
+                
+                <div>
+                  <label for="edit-category" class="block text-sm font-semibold mb-2">Category *</label>
+                  <input type="text" id="edit-category" value="${content.category}" required class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                </div>
+                
+                <div>
+                  <label for="edit-tags" class="block text-sm font-semibold mb-2">Tags</label>
+                  <input type="text" id="edit-tags" value="${content.tags || ''}" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                </div>
+                
+                ${content.type === 'articles' ? `
+                  <div>
+                    <label for="edit-readingTime" class="block text-sm font-semibold mb-2">Reading Time (minutes)</label>
+                    <input type="number" id="edit-readingTime" value="${content.readingTime || ''}" min="1" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                  </div>
+                ` : ''}
+                
+                <div class="flex items-center gap-2">
+                  <input type="checkbox" id="edit-featured" ${content.featured ? 'checked' : ''} class="w-5 h-5">
+                  <label for="edit-featured" class="text-sm font-semibold">Featured Content</label>
+                </div>
+                
+                <div class="flex gap-4">
+                  <button type="submit" id="update-btn" class="flex-1 admin-btn px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 smooth-transition font-semibold">Update</button>
+                  <button type="button" onclick="navigateTo('${content.type}')" class="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 smooth-transition font-semibold">Cancel</button>
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+      `;
+    }
+    
+    async function handleEditSubmit(event, id) {
+      event.preventDefault();
+      
+      const content = allContent.find(c => c.id === id);
+      if (!content) return;
+      
+      const updateBtn = document.getElementById('update-btn');
+      updateBtn.disabled = true;
+      updateBtn.textContent = 'Updating...';
+      
+      const updatedContent = {
+        ...content,
+        title: document.getElementById('edit-title').value,
+        author: document.getElementById('edit-author').value,
+        description: document.getElementById('edit-description').value,
+        content: document.getElementById('edit-content').value,
+        category: document.getElementById('edit-category').value,
+        tags: document.getElementById('edit-tags').value,
+        featured: document.getElementById('edit-featured').checked
+      };
+      
+      if (content.type === 'articles') {
+        const readingTime = document.getElementById('edit-readingTime').value;
+        if (readingTime) {
+          updatedContent.readingTime = parseInt(readingTime);
+        }
+      }
+      
+      const result = await window.dataSdk.update(updatedContent);
+      
+      if (result.isOk) {
+        showMessage('Content updated successfully!', 'success');
+        navigateTo(content.type);
+      } else {
+        showMessage('Failed to update content. Please try again.', 'error');
+        updateBtn.disabled = false;
+        updateBtn.textContent = 'Update';
+      }
+    }
+    
+    async function deleteContent(id) {
+      const content = allContent.find(c => c.id === id);
+      if (!content) return;
+      
+      const confirmDiv = document.createElement('div');
+      confirmDiv.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+      confirmDiv.innerHTML = `
+        <div class="bg-white rounded-lg p-8 max-w-md mx-4">
+          <h3 class="text-xl font-bold mb-4">Confirm Delete</h3>
+          <p class="mb-6">Are you sure you want to delete "${content.title}"? This action cannot be undone.</p>
+          <div class="flex gap-4">
+            <button onclick="this.closest('.fixed').remove()" class="flex-1 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 smooth-transition">Cancel</button>
+            <button onclick="confirmDelete('${id}')" class="flex-1 delete-btn px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 smooth-transition">Delete</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(confirmDiv);
+    }
+    
+    async function confirmDelete(id) {
+      const content = allContent.find(c => c.id === id);
+      if (!content) return;
+      
+      document.querySelector('.fixed').remove();
+      
+      const result = await window.dataSdk.delete(content);
+      
+      if (result.isOk) {
+        showMessage('Content deleted successfully!', 'success');
+      } else {
+        showMessage('Failed to delete content. Please try again.', 'error');
+      }
+    }
+    
+    function logoutAdmin() {
+      isAdmin = false;
+      navigateTo('home');
+      showMessage('Logged out successfully', 'success');
+    }
+    
+    // Utility Functions
+    function handleSearch(event) {
+      if (event.key === 'Enter') {
+        const query = event.target.value.toLowerCase();
+        const results = allContent.filter(c => 
+          c.title.toLowerCase().includes(query) || 
+          c.description.toLowerCase().includes(query) ||
+          c.author.toLowerCase().includes(query) ||
+          c.category.toLowerCase().includes(query)
+        );
+        
+        const mainContent = document.getElementById('main-content');
+        mainContent.innerHTML = `
+          <div class="w-full">
+            <section class="hero-gradient text-white py-12 px-4">
+              <div class="max-w-7xl mx-auto">
+                <h1 class="text-4xl font-bold mb-4">Search Results</h1>
+                <p class="text-lg">Found ${results.length} results for "${query}"</p>
+              </div>
+            </section>
+            
+            <section class="max-w-7xl mx-auto px-4 mt-8">
+              <button onclick="navigateTo('home')" class="mb-6 text-sm hover:underline">← Back to Home</button>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                ${results.length === 0 ? `
+                  <div class="col-span-3 text-center py-12">
+                    <div class="text-6xl mb-4">🔍</div>
+                    <p class="text-xl">No results found</p>
+                  </div>
+                ` : results.map(content => renderContentCard(content)).join('')}
+              </div>
+            </section>
+          </div>
+        `;
+      }
+    }
+    
+    function toggleTheme() {
+      isDarkMode = !isDarkMode;
+      document.getElementById('theme-toggle').textContent = isDarkMode ? '☀️' : '����';
+      // Theme toggle implementation would go here
+    }
+    
+    function toggleMobileMenu() {
+      mobileMenuOpen = !mobileMenuOpen;
+      const menu = document.getElementById('mobile-menu');
+      const icon = document.getElementById('mobile-menu-icon');
+      
+      if (mobileMenuOpen) {
+        menu.classList.remove('hidden');
+        icon.textContent = '✕';
+      } else {
+        menu.classList.add('hidden');
+        icon.textContent = '☰';
+      }
+    }
+    
+    function showMessage(message, type) {
+      const toast = document.createElement('div');
+      toast.className = `fixed top-4 right-4 px-6 py-4 rounded-lg text-white shadow-lg z-50 ${type === 'success' ? 'bg-green-600' : 'bg-red-600'} fade-in`;
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.remove();
+      }, 3000);
+    }
+    
+    // Reading Mode Functions
+    function showReadingModeMenu() {
+      const modalDiv = document.createElement('div');
+      modalDiv.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+      modalDiv.innerHTML = `
+        <div class="bg-white rounded-lg p-8 max-w-md mx-4 w-full">
+          <h3 class="text-xl font-bold mb-4 text-gray-800">Reading Mode</h3>
+          <div class="space-y-3">
+            <button onclick="setReadingMode('normal'); this.closest('.fixed').remove();" class="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 ${readingMode === 'normal' ? 'bg-purple-100' : ''}">
+              ☀️ Normal Mode
+            </button>
+            <button onclick="setReadingMode('dark'); this.closest('.fixed').remove();" class="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 ${readingMode === 'dark' ? 'bg-purple-100' : ''}">
+              🌙 Dark Mode
+            </button>
+            <button onclick="setReadingMode('sepia'); this.closest('.fixed').remove();" class="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 ${readingMode === 'sepia' ? 'bg-purple-100' : ''}">
+              📜 Sepia Mode (Book-like)
+            </button>
+            <button onclick="setReadingMode('large'); this.closest('.fixed').remove();" class="w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 ${readingMode === 'large' ? 'bg-purple-100' : ''}">
+              🔍 Large Text Mode
+            </button>
+          </div>
+          <button onclick="this.closest('.fixed').remove()" class="mt-4 w-full px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 smooth-transition">Close</button>
+        </div>
+      `;
+      document.body.appendChild(modalDiv);
+    }
+    
+    function setReadingMode(mode) {
+      readingMode = mode;
+      document.body.classList.remove('reading-dark', 'reading-sepia', 'reading-large');
+      if (mode !== 'normal') {
+        document.body.classList.add(`reading-${mode}`);
+      }
+      localStorage.setItem('readingMode', mode);
+      showMessage(`Reading mode: ${mode}`, 'success');
+    }
+    
+    // Like Functions
+    async function toggleLike(id) {
+      const content = allContent.find(c => c.id === id);
+      if (!content) return;
+      
+      const isLiked = likedContent.includes(id);
+      
+      if (isLiked) {
+        likedContent = likedContent.filter(i => i !== id);
+        content.likes = Math.max(0, (content.likes || 0) - 1);
+      } else {
+        likedContent.push(id);
+        content.likes = (content.likes || 0) + 1;
+      }
+      
+      localStorage.setItem('likedContent', JSON.stringify(likedContent));
+      
+      const result = await window.dataSdk.update(content);
+      if (!result.isOk) {
+        showMessage('Failed to update like', 'error');
+      }
+    }
+    
+    // Trending Page
+    function renderTrendingPage() {
+      const now = new Date();
+      const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+      
+      const recentContent = allContent.filter(c => new Date(c.createdAt) > weekAgo);
+      const trendingByViews = [...allContent].sort((a, b) => (b.views || 0) - (a.views || 0)).slice(0, 12);
+      const trendingByLikes = [...allContent].sort((a, b) => (b.likes || 0) - (a.likes || 0)).slice(0, 12);
+      
+      const mainContent = document.getElementById('main-content');
+      mainContent.innerHTML = `
+        <div class="w-full">
+          <section class="hero-gradient text-white py-12 px-4">
+            <div class="max-w-7xl mx-auto">
+              <h1 class="text-4xl font-bold mb-4">🔥 Trending Now</h1>
+              <p class="text-lg">What's hot on Sniral Texts</p>
+            </div>
+          </section>
+          
+          <section class="max-w-7xl mx-auto px-4 mt-8">
+            <h2 class="text-2xl font-bold mb-6">���� Most Viewed This Week</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+              ${trendingByViews.length === 0 ? `
+                <div class="col-span-3 text-center py-12">
+                  <div class="text-6xl mb-4">📊</div>
+                  <p class="text-xl">No trending content yet</p>
+                </div>
+              ` : trendingByViews.map(content => renderContentCard(content)).join('')}
+            </div>
+            
+            <h2 class="text-2xl font-bold mb-6">❤️ Most Liked</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+              ${trendingByLikes.length === 0 ? `
+                <div class="col-span-3 text-center py-12">
+                  <div class="text-6xl mb-4">💝</div>
+                  <p class="text-xl">No liked content yet</p>
+                </div>
+              ` : trendingByLikes.map(content => renderContentCard(content)).join('')}
+            </div>
+            
+            <h2 class="text-2xl font-bold mb-6">🆕 New This Week</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              ${recentContent.length === 0 ? `
+                <div class="col-span-3 text-center py-12">
+                  <div class="text-6xl mb-4">🎉</div>
+                  <p class="text-xl">No new content this week</p>
+                </div>
+              ` : recentContent.slice(0, 12).map(content => renderContentCard(content)).join('')}
+            </div>
+          </section>
+        </div>
+      `;
+    }
+    
+    // Night Filter Functions
+    function toggleNightFilter() {
+      nightFilterEnabled = !nightFilterEnabled;
+      localStorage.setItem('nightFilter', nightFilterEnabled);
+      
+      const existingFilter = document.querySelector('.night-filter');
+      if (nightFilterEnabled && !existingFilter) {
+        const filter = document.createElement('div');
+        filter.className = 'night-filter';
+        document.body.appendChild(filter);
+        showMessage('Night light filter enabled', 'success');
+      } else if (!nightFilterEnabled && existingFilter) {
+        existingFilter.remove();
+        showMessage('Night light filter disabled', 'success');
+      }
+    }
+    
+    // Text Size Functions
+    function increaseTextSize() {
+      textSizeMultiplier = Math.min(textSizeMultiplier + 0.1, 1.5);
+      applyTextSize();
+    }
+    
+    function decreaseTextSize() {
+      textSizeMultiplier = Math.max(textSizeMultiplier - 0.1, 0.8);
+      applyTextSize();
+    }
+    
+    function applyTextSize() {
+      document.body.style.fontSize = `${16 * textSizeMultiplier}px`;
+      localStorage.setItem('textSize', textSizeMultiplier);
+      showMessage(`Text size: ${Math.round(textSizeMultiplier * 100)}%`, 'success');
+    }
+    
+    // Surprise Me Function
+    function surpriseMe() {
+      if (allContent.length === 0) {
+        showMessage('No content available yet!', 'error');
+        return;
+      }
+      const randomContent = allContent[Math.floor(Math.random() * allContent.length)];
+      viewContent(randomContent.id);
+    }
+    
+    // Random Shuffle Function
+    function randomShuffle() {
+      if (allContent.length === 0) {
+        showMessage('No content available yet!', 'error');
+        return;
+      }
+      
+      const shuffled = [...allContent].sort(() => Math.random() - 0.5).slice(0, 12);
+      const mainContent = document.getElementById('main-content');
+      mainContent.innerHTML = `
+        <div class="w-full">
+          <section class="hero-gradient text-white py-12 px-4">
+            <div class="max-w-7xl mx-auto">
+              <h1 class="text-4xl font-bold mb-4">🔀 Shuffled for You</h1>
+              <p class="text-lg">Random selection of content</p>
+              <button onclick="randomShuffle()" class="mt-4 px-6 py-3 bg-white text-purple-700 rounded-lg font-semibold hover:bg-purple-50 smooth-transition">
+                🔀 Shuffle Again
+              </button>
+            </div>
+          </section>
+          
+          <section class="max-w-7xl mx-auto px-4 mt-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              ${shuffled.map(content => renderContentCard(content)).join('')}
+            </div>
+          </section>
+        </div>
+      `;
+    }
+    
+    // Read Aloud Function (Text-to-Speech)
+    function readAloud(id) {
+      const content = allContent.find(c => c.id === id);
+      if (!content || !content.content) return;
+      
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); // Stop any ongoing speech
+        
+        const utterance = new SpeechSynthesisUtterance(content.content.replace(/<[^>]*>/g, ''));
+        utterance.rate = 1.0;
+        utterance.pitch = 1.0;
+        utterance.volume = 1.0;
+        
+        utterance.onstart = () => showMessage('Reading aloud...', 'success');
+        utterance.onend = () => showMessage('Finished reading', 'success');
+        
+        window.speechSynthesis.speak(utterance);
+      } else {
+        showMessage('Text-to-speech not supported in your browser', 'error');
+      }
+    }
+    
+    // Playlist Functions
+    function addToPlaylist(id) {
+      const content = allContent.find(c => c.id === id);
+      if (!content) return;
+      
+      if (contentPlaylists.find(p => p.id === id)) {
+        showMessage('Already in your playlist!', 'error');
+        return;
+      }
+      
+      contentPlaylists.push({ id, title: content.title, type: content.type, addedAt: new Date().toISOString() });
+      localStorage.setItem('playlists', JSON.stringify(contentPlaylists));
+      showMessage('Added to playlist!', 'success');
+    }
+    
+    function viewPlaylist() {
+      const playlistContent = contentPlaylists.map(p => allContent.find(c => c.id === p.id)).filter(c => c);
+      
+      const mainContent = document.getElementById('main-content');
+      mainContent.innerHTML = `
+        <div class="w-full">
+          <section class="hero-gradient text-white py-12 px-4">
+            <div class="max-w-7xl mx-auto">
+              <h1 class="text-4xl font-bold mb-4">📚 My Playlist</h1>
+              <p class="text-lg">${playlistContent.length} items saved</p>
+            </div>
+          </section>
+          
+          <section class="max-w-7xl mx-auto px-4 mt-8">
+            ${playlistContent.length === 0 ? `
+              <div class="text-center py-12">
+                <div class="text-6xl mb-4">📚</div>
+                <p class="text-xl">Your playlist is empty</p>
+                <button onclick="navigateTo('home')" class="mt-4 px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 smooth-transition">Browse Content</button>
+              </div>
+            ` : `
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                ${playlistContent.map(content => renderContentCard(content)).join('')}
+              </div>
+            `}
+          </section>
+        </div>
+      `;
+    }
+    
+    // Share Content Function
+    function shareContent(id) {
+      const content = allContent.find(c => c.id === id);
+      if (!content) return;
+      
+      const shareText = `Check out "${content.title}" by ${content.author} on Sniral Texts!`;
+      
+      if (navigator.share) {
+        navigator.share({
+          title: content.title,
+          text: shareText,
+          url: window.location.href
+        }).then(() => showMessage('Shared successfully!', 'success'))
+          .catch(() => showMessage('Sharing cancelled', 'error'));
+      } else {
+        // Fallback: copy to clipboard
+        navigator.clipboard.writeText(shareText).then(() => {
+          showMessage('Link copied to clipboard!', 'success');
+        }).catch(() => {
+          showMessage('Failed to copy link', 'error');
+        });
+      }
+    }
+    
+    // Explore Page with Weekly Highlights & Editor's Picks
+    function renderExplorePage() {
+      const config = window.elementSdk?.config || defaultConfig;
+      
+      // Weekly Highlights (last 7 days, sorted by views)
+      const now = new Date();
+      const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+      const weeklyHighlights = allContent
+        .filter(c => new Date(c.createdAt) > weekAgo)
+        .sort((a, b) => (b.views || 0) - (a.views || 0))
+        .slice(0, 6);
+      
+      // Editor's Picks (featured content)
+      const editorsPicks = allContent.filter(c => c.featured).slice(0, 6);
+      
+      // New Releases (last 30 days)
+      const monthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+      const newReleases = allContent
+        .filter(c => new Date(c.createdAt) > monthAgo)
+        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        .slice(0, 6);
+      
+      // Monthly Top (by likes)
+      const monthlyTop = [...allContent]
+        .sort((a, b) => (b.likes || 0) - (a.likes || 0))
+        .slice(0, 6);
+      
+      const mainContent = document.getElementById('main-content');
+      mainContent.innerHTML = `
+        <div class="w-full">
+          <section class="hero-gradient text-white py-16 px-4">
+            <div class="max-w-7xl mx-auto text-center">
+              <h1 class="text-5xl font-bold mb-4 fade-in">🌟 Explore Sniral Texts</h1>
+              <p class="text-xl mb-8">Discover curated collections and trending content</p>
+              <div class="flex gap-4 justify-center flex-wrap">
+                <button onclick="surpriseMe()" class="px-6 py-3 bg-white text-purple-700 rounded-lg font-semibold hover:bg-purple-50 smooth-transition">
+                  🎲 Surprise Me!
+                </button>
+                <button onclick="randomShuffle()" class="px-6 py-3 bg-white text-purple-700 rounded-lg font-semibold hover:bg-purple-50 smooth-transition">
+                  🔀 Random Shuffle
+                </button>
+                <button onclick="viewPlaylist()" class="px-6 py-3 bg-white text-purple-700 rounded-lg font-semibold hover:bg-purple-50 smooth-transition">
+                  📚 My Playlist (${contentPlaylists.length})
+                </button>
+              </div>
+            </div>
+          </section>
+          
+          ${editorsPicks.length > 0 ? `
+          <section class="max-w-7xl mx-auto px-4 mt-16">
+            <h2 class="text-3xl font-bold mb-6">�� Editor's Picks</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              ${editorsPicks.map(content => renderContentCard(content)).join('')}
+            </div>
+          </section>
+          ` : ''}
+          
+          ${weeklyHighlights.length > 0 ? `
+          <section class="max-w-7xl mx-auto px-4 mt-16">
+            <h2 class="text-3xl font-bold mb-6">🔥 Weekly Highlights</h2>
+            <p class="text-gray-600 mb-6">Most viewed content this week</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              ${weeklyHighlights.map(content => renderContentCard(content)).join('')}
+            </div>
+          </section>
+          ` : ''}
+          
+          ${newReleases.length > 0 ? `
+          <section class="max-w-7xl mx-auto px-4 mt-16">
+            <h2 class="text-3xl font-bold mb-6">🆕 New Release Alerts</h2>
+            <p class="text-gray-600 mb-6">Fresh content from the last 30 days</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              ${newReleases.map(content => renderContentCard(content)).join('')}
+            </div>
+          </section>
+          ` : ''}
+          
+          ${monthlyTop.length > 0 ? `
+          <section class="max-w-7xl mx-auto px-4 mt-16 mb-16">
+            <h2 class="text-3xl font-bold mb-6">🏆 Monthly Top Lists</h2>
+            <p class="text-gray-600 mb-6">Most liked content this month</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              ${monthlyTop.map(content => renderContentCard(content)).join('')}
+            </div>
+          </section>
+          ` : ''}
+          
+          ${allContent.length === 0 ? `
+          <section class="max-w-7xl mx-auto px-4 mt-16 mb-16">
+            <div class="text-center py-12">
+              <div class="text-6xl mb-4">🌟</div>
+              <p class="text-xl">No content to explore yet</p>
+              ${isAdmin ? `<button onclick="renderAdminDashboard()" class="mt-4 px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 smooth-transition">Create Content</button>` : ''}
+            </div>
+          </section>
+          ` : ''}
+        </div>
+      `;
+    }
+    
+    // Initialize on load
+    initializeApp();
+    
+    // Restore reading mode on load
+    const savedMode = localStorage.getItem('readingMode');
+    if (savedMode) {
+      setReadingMode(savedMode);
+    }
+    
+    // Restore night filter on load
+    if (nightFilterEnabled) {
+      const filter = document.createElement('div');
+      filter.className = 'night-filter';
+      document.body.appendChild(filter);
+    }
+    
+    // Restore text size on load
+    if (textSizeMultiplier !== 1) {
+      document.body.style.fontSize = `${16 * textSizeMultiplier}px`;
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a937a987201bc43',t:'MTc2NDkzNzAzMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
